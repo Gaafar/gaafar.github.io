@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script src="js/arbor.js"></script>
+    <script src="js/arbor-tween.js"></script>
+    <script src="js/arbor-graphics.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <link href="css/get-shit-done.css" rel="stylesheet" />
+
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+    <link href="css/main.css" rel="stylesheet" />
+
+    <title></title>
+</head>
+<body>
+    <div id="gpage" class="gpage">
+
+        <div class="gnav">
+            <ul id="pageTabs" class="nav nav-pills gnav ct-green" role="tablist">
+
+                <li class="active">
+                    <a href="#jsonView" role="tab" data-toggle="tab">JSON</a>
+                </li>
+                <li>
+                    <a href="#graphView" role="tab" data-toggle="tab">Graph</a>
+                </li>
+                <!--<li><a href="#">Split</a></li>-->
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="jsonView">
+
+                <textarea id="jsonInput" class="gcenter gvertical gborder" rows="20" cols="150" placeholder="Paste JSON here"></textarea>
+                <button id="btnDraw" class="btn btn-success ct-green btn-lg gcenter">Draw</button>
+
+            </div>
+            <div class="tab-pane" id="graphView">
+                <span  class="label label-success gcenter gvertical" style="text-transform:none!important"><h6 style="text-transform:none!important" id="nodeInfoLabel">Select a node to see its path &amp; value</h6></span>
+                <canvas class="gcenter gborder" id="viewport" width="1000" height="600"></canvas>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
+
+<!-- Nav tabs -->
+<!--<ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
+    <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
+    <li><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
+</ul>-->
+<!-- Tab panes -->
+<!--<div class="tab-content">
+    <div class="tab-pane active" id="home">...</div>
+    <div class="tab-pane" id="profile">...</div>
+    <div class="tab-pane" id="messages">...</div>
+    <div class="tab-pane" id="settings">...</div>
+</div>-->

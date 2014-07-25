@@ -1,0 +1,32 @@
+﻿body {
+}
+
+.gpage {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    display: block;
+}
+
+.gnav {
+    margin-left: 25% !important;
+    margin-right: auto !important;
+    margin-bottom: 10px;
+    display: block !important;
+}
+
+.gborder {
+    border: 1px solid #05AE0E;
+    border-radius: 6px;
+}
+
+.gcenter {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.gvertical{
+    margin-top:10px;
+    margin-bottom:10px;
+}
