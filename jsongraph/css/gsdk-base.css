@@ -967,7 +967,7 @@ input.ct-red + span.switch-left, input.ct-red + span + label + span.switch-right
     text-align: center;
     text-decoration: none;
 }
-.tooltip-inner:after {
+/*.tooltip-inner:after {
     content: "";
     display: inline-block;
     left: 100%;
@@ -980,7 +980,7 @@ input.ct-red + span.switch-left, input.ct-red + span + label + span.switch-right
     left: 100%;
     margin-left: -60%;
     position: absolute;
-}
+}*/
 .tooltip.top {
     margin-top: -11px;
     padding: 0;

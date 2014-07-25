@@ -23,6 +23,7 @@
     <title></title>
 </head>
 <body>
+    <span id="info" data-toggle="tooltip" data-placement="left" style="position:fixed;top:50px;right:0px;font-size:25px;margin-right:20px" class="glyphicon glyphicon-info-sign ct-green"></span>
     <div id="gpage" class="gpage">
 
         <div class="gnav">
@@ -45,8 +46,8 @@
 
             </div>
             <div class="tab-pane" id="graphView">
-                <span  class="label label-success gcenter gvertical" style="text-transform:none!important"><h6 style="text-transform:none!important" id="nodeInfoLabel">Select a node to see its path &amp; value</h6></span>
-                <canvas class="gcenter gborder" id="viewport" width="1000" height="600"></canvas>
+                <span class="label label-success gcenter gvertical gborder" style="text-transform:none!important;width:1000px"><h6 style="text-transform:none!important" id="nodeInfoLabel">Select a node to see its path &amp; value</h6></span>
+                <canvas class="gcenter gborder gvertical" id="viewport" width="1000" height="600"></canvas>
             </div>
 
         </div>
