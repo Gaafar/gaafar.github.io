@@ -7,7 +7,20 @@
 var renderer = function (canvas) {
     var canvas = $(canvas).get(0)
     var ctx = canvas.getContext("2d");
-    var particleSystem
+    var particleSystem;
+    var swatch = ['orangered', 'orange', 'yellow', 'lightgreen', 'lightblue'];
+
+    function getNodeColor(i, swatch) {
+        if (i < 0) {
+            return swatch[0]
+        }
+        if (i > swatch.length - 1) {
+            //return getNodeColor(i - swatch.length, swatch);
+            return swatch[swatch.length - 1]
+        } else {
+            return swatch[i]
+        }
+    }
 
     var that = {
         init: function (system) {
@@ -69,10 +82,10 @@ var renderer = function (canvas) {
                 //ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w)
                 ctx.beginPath();
                 ctx.arc(pt.x, pt.y, w, 0, 2 * Math.PI, false);
-                ctx.fillStyle = "orange";
+                ctx.fillStyle = getNodeColor(node.data['@meta@'].level, swatch);
                 ctx.fill();
 
-                ctx.fillStyle = "green";
+                ctx.fillStyle = "gray";
                 ctx.font = "14px Arial";
                 //console.log((ctx.measureText(node.name)));
                 ctx.fillText(node.data['@meta@'].displayName, (pt.x - (ctx.measureText(node.data['@meta@'].displayName).width / 2)), (pt.y));
@@ -251,7 +264,7 @@ function createNode(name, obj, parent, level) {
     //add edge to parent node
     if (parent) {
         var edgeParams = {
-            length:0.5
+            length: 0.5
         }
 
         sys.addEdge(obj['@meta@'].path, parent['@meta@'].path, edgeParams)
