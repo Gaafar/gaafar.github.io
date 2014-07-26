@@ -254,6 +254,7 @@ function drawJson(data) {
         repulsion: 20,
         gravity: true, // use center-gravity to make the graph settle nicely (ymmv)
     };
+    sys = null;
     sys = arbor.ParticleSystem(300, 600, 0.5) // create the system with sensible repulsion/stiffness/friction
     sys.renderer = renderer("#viewport") // our newly created renderer will have its .init() method called shortly by sys...
 
