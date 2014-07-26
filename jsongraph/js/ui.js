@@ -47,7 +47,7 @@ $(document).ready(function () {
     var instructions = {
         hi:"this is the coolest way to view a json!",
         start: { step1: "click on the JSON tab on top", step2: "Paste your JSON file", step3: "Click Draw" },
-        view: { value: "click to see node path & value", collapse: "double click to expand/collapse" },
+        view: { value: "click to see node path & value", collapse: "double click to expand/collapse nodes with a stroke" },
         credits: { developer: "Mostafa Gaafar", graph: "arbor.js library", ui: "Bootstrap + Get Shit Done" },
         notes:["works best for smaller JSON","send bug reports & requests to @iga3far"]
     };
