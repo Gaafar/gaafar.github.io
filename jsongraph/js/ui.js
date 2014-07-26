@@ -13,7 +13,25 @@ function displayInfo(node) {
     //$('#nodeValue').text(node.data['@meta@'].path + ' = ' + node.data.original);
 
     $('#nodePath').text(node.data['@meta@'].path.toString());
-    $('#nodeValue').text(node.data.original.toString());
+
+    var value;
+    //to print array and object nicely
+    if (typeof (node.data.original) == 'object')
+    {
+        if (node.data.original[0] && node.data.original.length)//array
+        {
+            value = 'Array[' + node.data.original.length+ ']';
+        }
+        else {
+            //just object
+            value = '{Object}';
+        }
+
+    } else {
+        value = node.data.original.toString();
+    }
+
+    $('#nodeValue').text(value);
 
     //if (!$('#copyButtons').is(":visible")) {
 
