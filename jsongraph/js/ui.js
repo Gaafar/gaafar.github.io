@@ -1,5 +1,5 @@
 ﻿function draw() {
-    console.log($("#jsonInput").val());
+    //console.log($("#jsonInput").val());
     drawJson(JSON.parse($("#jsonInput").val()));
 
 
@@ -44,6 +44,14 @@ $(document).ready(function () {
 
     var temp2 = '[{"_id": "53d2a283b9e8b9ed7956f7ea", "index": 0, "guid": "83a03010-3e8b-480e-a351-ae394caf8f2c", "isActive": true, "balance": "$3,838.97", "picture": "http://placehold.it/32x32", "age": 27, "eyeColor": "green", "name": "Rosella Mckinney", "gender": "female", "company": "STOCKPOST", "email": "rosellamckinney@stockpost.com", "list":[  "rosellamckinney@stockpost.com",  "rosellamckinney@stockpost.com",  "rosellamckinney@stockpost.com",  "rosellamckinney@stockpost.com",  "rosellamckinney@stockpost.com",  "rosellamckinney@stockpost.com",  "rosellamckinney@stockpost.com",   "rosellamckinney@stockpost.com",   "rosellamckinney@stockpost.com",   "rosellamckinney@stockpost.com"  ],  "obj": {"email": "rosellamckinney@stockpost.com",   "phone": "45272752"}}]'
 
-    $("#jsonInput").val(temp2);
+    var instructions = {
+        hi:"this is the coolest way to view a json!",
+        start: { step1: "click on the JSON tab on top", step2: "Paste your JSON file", step3: "Click Draw" },
+        view: { value: "click to see node path & value", collapse: "double click to expand/collapse" },
+        credits: { developer: "Mostafa Gaafar", graph: "arbor.js library", ui: "Bootstrap + Get Shit Done" },
+        notes:["works best for smaller JSON","send bug reports & requests to @iga3far"]
+    };
+    var insJson = JSON.stringify(instructions);
+    $("#jsonInput").val(insJson);
     draw();
 });

@@ -24,7 +24,7 @@ var renderer = function (canvas) {
 
     var that = {
         init: function (system) {
-            console.log("Initializing");
+            console.log("The hell are you looking at?!");
             //
             // the particle system will call the init function once, right before the
             // first frame is to be drawn. it's a good place to set up the canvas and
@@ -44,7 +44,7 @@ var renderer = function (canvas) {
         },
 
         redraw: function () {
-            console.log("Redrawing");
+            //console.log("Redrawing");
 
             // 
             // redraw will be called repeatedly during the run whenever the node positions
@@ -86,7 +86,7 @@ var renderer = function (canvas) {
                 ctx.fill();
 
                 if (node.data['@meta@'].type == 'object') {
-                    ctx.lineWidth = 3
+                    ctx.lineWidth = 4
                     ctx.strokeStyle = getNodeColor(node.data['@meta@'].level + 1, swatch);
                     ctx.stroke();
                     ctx.lineWidth = 1
@@ -122,7 +122,7 @@ var renderer = function (canvas) {
                     $(canvas).bind('mousemove', handler.dragged)
                     $(window).bind('mouseup', handler.dropped)
                     displayInfo(dragged.node);
-                    console.log(dragged.node);
+                    //console.log(dragged.node);
 
                     return false
                 },
