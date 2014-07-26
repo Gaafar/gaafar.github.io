@@ -6,9 +6,38 @@
     $('#pageTabs a[href="#graphView"]').tab('show') // Select tab by name
     //$("#jsonInput").val();
 }
+
+
+function displayInfo(node) {
+    //$('#nodePath').text(node.data['@meta@'].path + ' = ' + node.data.original);
+    //$('#nodeValue').text(node.data['@meta@'].path + ' = ' + node.data.original);
+
+    $('#nodePath').text(node.data['@meta@'].path.toString());
+    $('#nodeValue').text(node.data.original.toString());
+
+    //if (!$('#copyButtons').is(":visible")) {
+
+    //    $('#copyButtons').show();
+    //}
+}
+
+function copyPath() {
+
+}
+
+function copyValue() {
+
+}
+
 $(document).ready(function () {
-    $('#info').tooltip({html:true,title:'Version 1.0<br>Developed by Mostafa Gaafar<br>Graph by arbor.js'})
+    $('#info').tooltip({ html: true, title: 'Version 1.0<br>Developed by Mostafa Gaafar<br>Graph by arbor.js' })
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
+
     $("#btnDraw").click(draw);
+    //$("#copyPath").click(copyPath);
+    //$("#copyValue").click(copyValue);
 
     var temp = '{"_id": "53d1cef83b04edda916d716f","index": 0,"guid": "fe1f0100-5689-4a22-9940-4bdbd5af55dc","isActive": false,"balance": "$1,095.73","picture": "http://placehold.it/32x32","age": 21,"eyeColor": "blue","name": "Concepcion Tyson","gender": "female","company": "QUARMONY","email": "concepciontyson@quarmony.com"}';
 

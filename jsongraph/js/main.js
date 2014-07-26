@@ -114,6 +114,7 @@ var renderer = function (canvas) {
                     $(canvas).bind('mousemove', handler.dragged)
                     $(window).bind('mouseup', handler.dropped)
                     displayInfo(dragged.node);
+                    console.log(dragged.node.data);
 
 
                     return false
@@ -152,7 +153,7 @@ var renderer = function (canvas) {
                     if (nearest.node.data.shape != 'dot') {
                         selected = (nearest.distance < 30) ? nearest : null
                         if (selected) {
-                            console.log(selected.node.data);
+                            //console.log(selected.node.data);
                             //dom.addClass('linkable')
                             //window.status = selected.node.data.link.replace(/^\//, "http://" + window.location.host + "/").replace(/^#/, '')
                         }
@@ -290,6 +291,3 @@ function createNode(name, obj, parent, level) {
     }
 }
 
-function displayInfo(node) {
-    $('#nodeInfoLabel').text(node.data['@meta@'].path + ' = ' + node.data.original);
-}

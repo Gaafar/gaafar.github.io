@@ -45,9 +45,23 @@
                 <button id="btnDraw" class="btn btn-success ct-green btn-lg gcenter">Draw</button>
 
             </div>
-            <div class="tab-pane" id="graphView">
-                <span class="label label-success gcenter gvertical gborder" style="text-transform:none!important;width:1000px"><h6 style="text-transform:none!important" id="nodeInfoLabel">Select a node to see its path &amp; value</h6></span>
-                <canvas class="gcenter gborder gvertical" id="viewport" width="1000" height="600"></canvas>
+            <div class="tab-pane" id="graphView" >
+                <div class="gcenter" >
+
+                    <span  class="label label-success gvertical gborder gcenter" style="display:inline-block;text-transform:none!important;width:45%"><h6 style="text-transform:none!important" id="nodePath">Node path</h6></span>
+                    
+                    <span class="label label-success gvertical gborder gcenter" style="display:inline-block;text-transform:none!important;width:30px"><h6 style="text-transform:none!important" id="nodePath">:</h6></span>
+
+                    <span  class="label label-success gvertical gborder gcenter" style="display:inline-block;text-transform:none!important;width:45%"><h6 style="text-transform:none!important" id="nodeValue">Node value</h6></span>
+
+                    <!--<div id="copyButtons" class="btn-group-vertical" style="display:none;top:300px;right:20px;position:absolute">
+                        <button id="copyPath" type="button" class="btn btn-info popover-dismiss" data-toggle="popover" data-placement="left" data-content="Copied">Copy path</button>
+
+                        <button id="copyValue" type="button" class="btn btn-info popover-dismiss" data-toggle="popover" data-placement="left" data-content="Copied" >Copy value</button>
+                    </div>-->
+                </div>
+
+                <canvas class="gcenter gborder gvertical" id="viewport" width="1000" height="550"></canvas>
             </div>
 
         </div>
