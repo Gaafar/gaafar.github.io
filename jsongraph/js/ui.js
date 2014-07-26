@@ -30,7 +30,8 @@ function copyValue() {
 }
 
 $(document).ready(function () {
-    $('#info').tooltip({ html: true, title: 'Version 1.0<br>Developed by Mostafa Gaafar<br>Graph by arbor.js' })
+    $('#info').tooltip({ html: true, title: 'Version 1.0<br><br>Developed by Mostafa Gaafar<br><br>Graph by arbor.js' })
+    $('#help').tooltip({ html: true, title: 'Paste JSON and press "Draw"<br><br>Click a node to see its path & value<br><br>Double click to expand/collapse' })
     $('.popover-dismiss').popover({
         trigger: 'focus'
     })

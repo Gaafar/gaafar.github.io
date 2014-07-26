@@ -8,7 +8,7 @@ var renderer = function (canvas) {
     var canvas = $(canvas).get(0)
     var ctx = canvas.getContext("2d");
     var particleSystem;
-    var swatch = ['orangered', 'orange', 'yellow', 'lightgreen', 'lightblue'];
+    var swatch = ['lightblue', 'orange', 'yellow', 'lightgreen', 'orangered'];
 
     function getNodeColor(i, swatch) {
         if (i < 0) {
@@ -77,13 +77,20 @@ var renderer = function (canvas) {
                 // pt:   {x:#, y:#}  node position in screen coords
 
                 // draw a rectangle centered at pt
-                var w = 20
+                var w = node.data['@meta@'].radius;
                 ctx.fillStyle = (node.data.alone) ? "orange" : "black"
                 //ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w)
                 ctx.beginPath();
                 ctx.arc(pt.x, pt.y, w, 0, 2 * Math.PI, false);
                 ctx.fillStyle = getNodeColor(node.data['@meta@'].level, swatch);
                 ctx.fill();
+
+                if (node.data['@meta@'].type == 'object') {
+                    ctx.lineWidth = 3
+                    ctx.strokeStyle = getNodeColor(node.data['@meta@'].level + 1, swatch);
+                    ctx.stroke();
+                    ctx.lineWidth = 1
+                }
 
                 ctx.fillStyle = "gray";
                 ctx.font = "14px Arial";
@@ -96,6 +103,7 @@ var renderer = function (canvas) {
             // no-nonsense drag and drop (thanks springy.js)
             var dragged = null;
             var nearest = null;
+            var dblclicked = null;
 
             // set up a handler object that will initially listen for mousedowns then
             // for moves and mouseups while dragging
@@ -114,11 +122,22 @@ var renderer = function (canvas) {
                     $(canvas).bind('mousemove', handler.dragged)
                     $(window).bind('mouseup', handler.dropped)
                     displayInfo(dragged.node);
-                    console.log(dragged.node.data);
-
+                    console.log(dragged.node);
 
                     return false
                 },
+                dblclick: function (e) {
+                    var pos = $(canvas).offset();
+                    _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top)
+                    dblclicked = particleSystem.nearest(_mouseP);
+
+                    //temp fix for root collapse then expand bug
+                    //if (dblclicked.node.data['@meta@'].path != 'root') {
+
+                    toggleExpand(dblclicked.node);
+                    //}
+                }
+                ,
                 dragged: function (e) {
                     var pos = $(canvas).offset();
                     var s = arbor.Point(e.pageX - pos.left, e.pageY - pos.top)
@@ -177,6 +196,7 @@ var renderer = function (canvas) {
             // start listening
             $(canvas).mousedown(handler.clicked);
             $(canvas).mousemove(handler.moved);
+            $(canvas).dblclick(handler.dblclick)
 
         },
 
@@ -237,11 +257,11 @@ function drawJson(data) {
     sys = arbor.ParticleSystem(300, 600, 0.5) // create the system with sensible repulsion/stiffness/friction
     sys.renderer = renderer("#viewport") // our newly created renderer will have its .init() method called shortly by sys...
 
-    createNode('root', { original: data }, null, 0);
+    createNode('root', { original: data }, null, 0, Number.POSITIVE_INFINITY);
 
 }
 
-function createNode(name, obj, parent, level) {
+function createNode(name, obj, parent, level, maxLevel) {
     if (!parent) {
         // init root node
         obj['@meta@'] = {
@@ -250,15 +270,18 @@ function createNode(name, obj, parent, level) {
         }
     }
     else {
-        var appendingName = name[0] == '[' ? name : '.' + name;
+        var appendingName = getPathAppendix(name);
         obj['@meta@'] = {
             path: parent['@meta@'].path + appendingName,
             displayName: name
         }
     }
 
+
+
     obj['@meta@'].level = level;
     obj['@meta@'].type = typeof (obj.original);
+    obj['@meta@'].radius = 30 - (level * 4)
 
     //add current node with its data
     sys.addNode(obj['@meta@'].path, obj);
@@ -272,22 +295,89 @@ function createNode(name, obj, parent, level) {
     }
 
     //add child nodes for arrays and objects only
-    if (typeof (obj.original) == 'object') {
-
+    if (typeof (obj.original) == 'object' && level < maxLevel) {
         for (var prop in obj.original) {
-            var newName;
+            var newName = getPropertyName(prop)
 
-            //if prop is not an indexer
-            if (isNaN(prop)) {
-                newName = prop;
-            } else {
-                newName = '[' + prop + ']';
-            }
-            createNode(newName, { original: obj.original[prop] }, obj, level + 1);
-
+            createNode(newName, { original: obj.original[prop] }, obj, level + 1, maxLevel);
+            obj['@meta@'].isExpanded = true;
             //sys.addNode(prop, { value: data[prop] });
         }
         //sys.addEdge('root', prop)
     }
 }
 
+function toggleExpand(node) {
+    if (node.data['@meta@'].isExpanded == true) {
+        collapseNode(node);
+    } else {
+        expandNode(node);
+    }
+}
+
+function collapseNode(node) {
+    if (node.data['@meta@'].type == 'object') {
+        for (var prop in node.data.original) {
+
+            var newName = getPropertyName(prop);
+            var appendingName = getPathAppendix(newName);
+
+            //collapse nested nodes
+            if (typeof (node.data.original[prop]) == 'object') {
+                var nestedNode = sys.getNode(node.data['@meta@'].path + appendingName);
+                if (nestedNode.data['@meta@'].isExpanded) {
+                    collapseNode(nestedNode);
+
+                }
+            }
+
+            //prune each child node
+            //temp fix for expanding root
+            if (node.data['@meta@'].path != 'root') {
+
+                sys.pruneNode(node.data['@meta@'].path + appendingName);
+            }
+        }
+    }
+    //temp fix for expanding root
+    if (node.data['@meta@'].path != 'root') {
+
+        node.data['@meta@'].isExpanded = false
+    }
+}
+
+function expandNode(node) {
+
+    //temp fix for expanding root>>NOT WORKING
+    //if (node.data['@meta@'].path == 'root') {
+    //    sys.pruneNode(node.data['@meta@'].path);
+    //    createNode('root', { original: node.data.original }, null, 0, 1);
+    //    //drawJson(node.data.original);
+    //    return;
+    //}
+
+
+    if (node.data['@meta@'].type == 'object') {
+        for (var prop in node.data.original) {
+            var newName = getPropertyName(prop);
+            createNode(newName, { original: node.data.original[prop] }, node.data, node.data['@meta@'].level + 1, node.data['@meta@'].level + 1);
+        }
+    }
+    node.data['@meta@'].isExpanded = true;
+}
+
+function getPropertyName(prop) {
+    var newName;
+    //if prop is not an indexer
+    if (isNaN(prop)) {
+        newName = prop;
+    } else {
+        newName = '[' + prop + ']';
+    }
+    return newName;
+}
+
+function getPathAppendix(name) {
+    return name[0] == '[' ? name : '.' + name;
+
+}

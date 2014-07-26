@@ -1,0 +1,47 @@
+﻿<html>
+<head>
+   
+</head>
+<body>
+    <p>This text will be copied when you click the button</p>
+    <p id='copy_this_text' style="width: 50%; border: 1px solid #888">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+        sed do eiusmod <i>tempor incididunt ut labore</i> et dolore magna
+        aliqua. <strong>Ut enim ad minim veniam</strong>, quis nostrud exercitation
+        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+
+    <button id="copy-button">Copy to Clipboard</button>
+
+    <br>
+    <p>Paste into this box with Ctrl/Cmd-V to show that it worked.</p>
+    <textarea cols='60' rows='10'></textarea>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/ZeroClipboard.js"></script>
+    <script>
+        // Specify where the Flash movie can be found if not in root folder for web site
+        ZeroClipboard.config({ moviePath: 'js/ZeroClipboard.swf' });
+
+        var client = new ZeroClipboard($("#copy-button"));
+
+        client.on('load', function (client) {
+
+            client.on('datarequested', function (client) {
+                var text = $('#copy_this_text').text();
+                client.setText(text);
+            });
+
+            // callback triggered on successful copying
+            client.on('complete', function (client, args) {
+                console.log("Text copied to clipboard: \n" + args.text);
+            });
+        });
+
+        // In case of error - such as Flash not being available
+        client.on('wrongflash noflash', function () {
+            ZeroClipboard.destroy();
+        });
+
+    </script>
+</body>
+</html>
