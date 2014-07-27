@@ -106,6 +106,6 @@ $(document).ready(function () {
         ]
     }
 
-    $("#jsonInput").val(JSON.stringify(googleJson));
+    $("#jsonInput").val(JSON.stringify(instructions));
     draw();
 });

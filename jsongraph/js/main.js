@@ -8,7 +8,7 @@ var renderer = function (canvas) {
     var canvas = $(canvas).get(0)
     var ctx = canvas.getContext("2d");
     var particleSystem;
-    var swatch = ['lightblue', 'orange', 'yellow', 'lightgreen', 'orangered'];
+    var swatch = ['snow', 'orange', 'yellow', 'lightgreen', 'coral', 'lightblue'];
 
     function getNodeColor(i, swatch) {
         if (i < 0) {
@@ -24,7 +24,7 @@ var renderer = function (canvas) {
 
     var that = {
         init: function (system) {
-            console.log("The hell are you looking at?!");
+            //console.log("The hell are you looking at?!");
             //
             // the particle system will call the init function once, right before the
             // first frame is to be drawn. it's a good place to set up the canvas and
@@ -166,7 +166,7 @@ var renderer = function (canvas) {
                     var pos = $(canvas).offset();
                     _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top)
                     nearest = particleSystem.nearest(_mouseP);
-
+                    //if (!nearest) return false
                     if (!nearest.node) return false
 
                     if (nearest.node.data.shape != 'dot') {
@@ -199,55 +199,23 @@ var renderer = function (canvas) {
             $(canvas).dblclick(handler.dblclick)
 
         },
+        unbind: function()
+        {
+            $(canvas).unbind();
+        }
 
     }
     return that
 }
 
-$(document).ready(function () {
-
-    // add some nodes to the graph and watch it go...
-    //sys.addEdge('a','b')
-    //sys.addEdge('a','c')
-    //sys.addEdge('a','d')
-    //sys.addEdge('a','e')
-    //sys.addNode('f', {alone:true, mass:.25})
-
-    // or, equivalently:
-    //
-    // sys.graft({
-    //   nodes:{
-    //     f:{alone:true, mass:.25}
-    //   }, 
-    //   edges:{
-    //     a:{ b:{},
-    //         c:{},
-    //         d:{},
-    //         e:{}
-    //     }
-    //   }
-    // })
-    //console.log(sys);
-    //drawJson(data);
-
-});
-
-var staticData = {
-    "_id": "53d1cef83b04edda916d716f",
-    "index": 0,
-    "guid": "fe1f0100-5689-4a22-9940-4bdbd5af55dc",
-    "isActive": false,
-    "balance": "$1,095.73",
-    "picture": "http://placehold.it/32x32",
-    "age": 21,
-    "eyeColor": "blue",
-    "name": "Concepcion Tyson",
-    "gender": "female",
-    "company": "QUARMONY",
-    "email": "concepciontyson@quarmony.com"
-};
 
 function drawJson(data) {
+
+    //events are bound twice on drawing a new json
+    if (typeof (sys) != 'undefined') {
+        sys.renderer.unbind();;
+    }
+
     var sysParams = {
         friction: .5,
         stiffness: 1000,
@@ -348,15 +316,6 @@ function collapseNode(node) {
 }
 
 function expandNode(node) {
-
-    //temp fix for expanding root>>NOT WORKING
-    //if (node.data['@meta@'].path == 'root') {
-    //    sys.pruneNode(node.data['@meta@'].path);
-    //    createNode('root', { original: node.data.original }, null, 0, 1);
-    //    //drawJson(node.data.original);
-    //    return;
-    //}
-
 
     if (node.data['@meta@'].type == 'object') {
         for (var prop in node.data.original) {
