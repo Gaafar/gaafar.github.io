@@ -2,6 +2,21 @@
     //console.log($("#jsonInput").val());
     drawJson(JSON.parse($("#jsonInput").val()));
 
+    $("#depthSlider").slider({
+
+        min: 1,
+        max: jsonDepth,
+        value: jsonDepth,
+        orientation: "horizontal",
+        range: "min",
+        animate: true,
+        slide: function (event, ui) {
+            $("#depthSliderLabel").text(ui.value);
+            drawTillDepth(null, ui.value);
+        }
+
+    });
+    $("#depthSliderLabel").text($("#depthSlider").slider("value"));
 
     $('#pageTabs a[href="#graphView"]').tab('show') // Select tab by name
     //$("#jsonInput").val();
@@ -16,11 +31,10 @@ function displayInfo(node) {
 
     var value;
     //to print array and object nicely
-    if (typeof (node.data.original) == 'object')
-    {
+    if (typeof (node.data.original) == 'object') {
         if (node.data.original[0] && node.data.original.length)//array
         {
-            value = 'Array[' + node.data.original.length+ ']';
+            value = 'Array[' + node.data.original.length + ']';
         }
         else {
             //just object
@@ -54,6 +68,9 @@ $(document).ready(function () {
         trigger: 'focus'
     })
 
+
+    
+
     $("#btnDraw").click(draw);
     //$("#copyPath").click(copyPath);
     //$("#copyValue").click(copyValue);
@@ -67,7 +84,7 @@ $(document).ready(function () {
         start: { step1: "click on the JSON tab on top", step2: "Paste your JSON", step3: "Click Draw" },
         view: { value: "click to see node path & value", collapse: "double click to expand/collapse nodes with a stroke" },
         credits: { developer: "Mostafa Gaafar", graph: "arbor.js", ui: "Bootstrap + Get Shit Done" },
-        notes:["works best for smaller JSON","send feedback to @iga3far"]
+        notes: ["works best for smaller JSON", "send feedback to @iga3far"]
     };
     var insJson = JSON.stringify(instructions);
 

@@ -66,6 +66,7 @@
     <Content Include="js\arbor-graphics.js" />
     <Content Include="js\arbor-tween.js" />
     <Content Include="js\arbor.js" />
+    <Content Include="js\jquery-ui.min.js" />
     <Content Include="js\main.js" />
     <Content Include="js\ui.js" />
     <Content Include="sample-project\index.html" />

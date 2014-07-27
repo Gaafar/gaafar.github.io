@@ -199,8 +199,7 @@ var renderer = function (canvas) {
             $(canvas).dblclick(handler.dblclick)
 
         },
-        unbind: function()
-        {
+        unbind: function () {
             $(canvas).unbind();
         }
 
@@ -225,7 +224,7 @@ function drawJson(data) {
     sys = null;
     sys = arbor.ParticleSystem(300, 600, 0.5) // create the system with sensible repulsion/stiffness/friction
     sys.renderer = renderer("#viewport") // our newly created renderer will have its .init() method called shortly by sys...
-
+    jsonDepth = 0;
     createNode('root', { original: data }, null, 0, Number.POSITIVE_INFINITY);
 
 }
@@ -274,6 +273,12 @@ function createNode(name, obj, parent, level, maxLevel) {
         }
         //sys.addEdge('root', prop)
     }
+
+    //to set max json depth
+    if(maxLevel==Number.POSITIVE_INFINITY)//when drawing entire json only
+    {
+        jsonDepth = level > jsonDepth?level:jsonDepth;
+    }
 }
 
 function toggleExpand(node) {
@@ -285,6 +290,7 @@ function toggleExpand(node) {
 }
 
 function collapseNode(node) {
+    if (!node.data['@meta@'].isExpanded) return false;
     if (node.data['@meta@'].type == 'object') {
         for (var prop in node.data.original) {
 
@@ -316,6 +322,7 @@ function collapseNode(node) {
 }
 
 function expandNode(node) {
+    if (node.data['@meta@'].isExpanded) return false;
 
     if (node.data['@meta@'].type == 'object') {
         for (var prop in node.data.original) {
@@ -339,5 +346,58 @@ function getPropertyName(prop) {
 
 function getPathAppendix(name) {
     return name[0] == '[' ? name : '.' + name;
+
+}
+
+function drawTillDepth(node, depth) {
+    if (depth < 1) {
+        depth = 1;
+    }
+    //start with root node if no args
+    if (!node) {
+        node = sys.getNode('root');
+    }
+
+    //sanity check
+    if (!node) {
+        return;
+    }
+
+    //check if children should be drawn
+    if (node.data['@meta@'].level + 1 < depth) {
+        //expand all children and loop on them (granted to be drawn in previous recursive call)
+        for (var prop in node.data.original) {
+            var newName = getPropertyName(prop);
+            var appendingName = getPathAppendix(newName);
+
+            if (typeof (node.data.original[prop]) == 'object') {
+                var nestedNode = sys.getNode(node.data['@meta@'].path + appendingName);
+                //sanity check
+                if (nestedNode) {
+                    expandNode(nestedNode);
+
+                    //recursive call
+                    drawTillDepth(nestedNode, depth);
+                }
+            }
+        }
+
+    } else
+        //level+1=depth
+    {
+        //collapse all child nodes
+        for (var prop in node.data.original) {
+            var newName = getPropertyName(prop);
+            var appendingName = getPathAppendix(newName);
+
+            if (typeof (node.data.original[prop]) == 'object') {
+                var nestedNode = sys.getNode(node.data['@meta@'].path + appendingName);
+                //sanity check
+                if (nestedNode) {
+                    collapseNode(nestedNode);
+                }
+            }
+        }
+    }
 
 }

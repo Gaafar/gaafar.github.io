@@ -3,6 +3,8 @@
 <head>
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 
+    <script src="js/jquery-ui.min.js"></script>
+
     <script src="js/arbor.js"></script>
     <script src="js/arbor-tween.js"></script>
     <script src="js/arbor-graphics.js"></script>
@@ -14,8 +16,10 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-    <link href="css/get-shit-done.css" rel="stylesheet" />
 
+
+
+    <link href="css/get-shit-done.css" rel="stylesheet" />
     <script src="js/main.js"></script>
     <script src="js/ui.js"></script>
     <link href="css/main.css" rel="stylesheet" />
@@ -49,14 +53,14 @@
                 <button id="btnDraw" class="btn btn-success ct-green btn-lg gcenter">Draw</button>
 
             </div>
-            <div class="tab-pane" id="graphView" >
-                <div class="gcenter" >
+            <div class="tab-pane" id="graphView">
+                <div class="gcenter">
 
-                    <span  class="label label-success gvertical gborder gcenter" style="display:inline-block;text-transform:none!important;width:45%"><h6 style="text-transform:none!important" id="nodePath">Node path</h6></span>
-                    
-                    <span class="label label-success gvertical gborder gcenter" style="display:inline-block;text-transform:none!important;width:30px"><h6 style="text-transform:none!important" id="nodePath">:</h6></span>
+                    <span class="label label-success gvertical  gcenter" style="display:inline-block;text-transform:none!important;width:45%"><h6 style="text-transform:none!important" id="nodePath">Node path</h6></span>
 
-                    <span  class="label label-success gvertical gborder gcenter" style="display:inline-block;text-transform:none!important;width:45%"><h6 style="text-transform:none!important" id="nodeValue">Node value</h6></span>
+                    <span class="label label-success gvertical  gcenter" style="display:inline-block;text-transform:none!important;width:30px"><h6 style="text-transform:none!important" id="nodePath">:</h6></span>
+
+                    <span class="label label-success gvertical  gcenter" style="display:inline-block;text-transform:none!important;width:45%"><h6 style="text-transform:none!important" id="nodeValue">Node value</h6></span>
 
                     <!--<div id="copyButtons" class="btn-group-vertical" style="display:none;top:300px;right:20px;position:absolute">
                         <button id="copyPath" type="button" class="btn btn-info popover-dismiss" data-toggle="popover" data-placement="left" data-content="Copied">Copy path</button>
@@ -64,7 +68,21 @@
                         <button id="copyValue" type="button" class="btn btn-info popover-dismiss" data-toggle="popover" data-placement="left" data-content="Copied" >Copy value</button>
                     </div>-->
                 </div>
+                <div class="gcenter">
+                    <div class="label label-success" style="display:inline-block;">
+                        <h7 style="text-transform:none!important;">
+                            Expand to depth
+                        </h7>
+                    </div>
 
+                    <div style="display:inline-block;width:400px;margin-left:10px;margin-right:10px" id="depthSlider" class="slider-info ct-green"></div>
+
+                    <div class="label label-success" style="display:inline-block;">
+                        <h7 id="depthSliderLabel" style="text-transform:none!important;">
+                            
+                        </h7>
+                    </div>
+                </div>
                 <canvas class="gcenter gborder gvertical" id="viewport" width="1000" height="550"></canvas>
             </div>
 
