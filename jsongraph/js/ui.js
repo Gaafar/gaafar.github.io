@@ -67,7 +67,7 @@ $(document).ready(function () {
         start: { step1: "click on the JSON tab on top", step2: "Paste your JSON", step3: "Click Draw" },
         view: { value: "click to see node path & value", collapse: "double click to expand/collapse nodes with a stroke" },
         credits: { developer: "Mostafa Gaafar", graph: "arbor.js", ui: "Bootstrap + Get Shit Done" },
-        notes:["works best for smaller JSON","send bug reports & requests to @iga3far"]
+        notes:["works best for smaller JSON","send feedback to @iga3far"]
     };
     var insJson = JSON.stringify(instructions);
 
