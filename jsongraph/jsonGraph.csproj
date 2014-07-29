@@ -61,12 +61,16 @@
     <Content Include="css\gsdk-base.css" />
     <Content Include="css\gsdk-checkbox-radio-switch.css" />
     <Content Include="css\gsdk-sliders.css" />
+    <Content Include="css\jquery-linedtextarea.css" />
     <Content Include="css\main.css" />
     <Content Include="index.html" />
     <Content Include="js\arbor-graphics.js" />
     <Content Include="js\arbor-tween.js" />
     <Content Include="js\arbor.js" />
+    <Content Include="js\formatter.js" />
+    <Content Include="js\jquery-linedtextarea.js" />
     <Content Include="js\jquery-ui.min.js" />
+    <Content Include="js\jsonlint.js" />
     <Content Include="js\main.js" />
     <Content Include="js\ui.js" />
     <Content Include="sample-project\index.html" />

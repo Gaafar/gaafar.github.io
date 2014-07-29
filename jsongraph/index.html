@@ -16,14 +16,21 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-
+    <script src="js/jsonlint.js"></script>
+    <script src="js/formatter.js"></script>
+    <!--<script src="http://yui.yahooapis.com/3.17.2/build/yui/yui-min.js"></script>-->
+    <!--<script src="js/jslint.js"></script>-->
+    <!--<script src="js/behave.js"></script>-->
 
 
     <link href="css/get-shit-done.css" rel="stylesheet" />
     <script src="js/main.js"></script>
     <script src="js/ui.js"></script>
-    <link href="css/main.css" rel="stylesheet" />
+    <script src="js/jquery-linedtextarea.js"></script>
 
+
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/jquery-linedtextarea.css" rel="stylesheet" />
     <title></title>
 </head>
 <body>
@@ -49,8 +56,14 @@
         <div class="tab-content">
             <div class="tab-pane active" id="jsonView">
 
-                <textarea id="jsonInput" class="gcenter gvertical gborder" rows="20" cols="150" placeholder="Paste JSON here" style="text-align:left!important"></textarea>
-                <button id="btnDraw" class="btn btn-success ct-green btn-lg gcenter">Draw</button>
+                    <textarea id="jsonInput" class="gcenter gvertical gborder linedtextarea" rows="25" cols="150" placeholder="Paste JSON here" style="text-align:left!important"></textarea>
+
+
+
+                <div class="gcenter" style="margin-top:10px">
+                    <button id="btnFormat" class="btn btn-success ct-green btn-lg ">Format</button>
+                    <button id="btnDraw" class="btn btn-success ct-green btn-lg ">Draw</button>
+                </div>
 
             </div>
             <div class="tab-pane" id="graphView">
@@ -79,7 +92,7 @@
 
                     <div class="label label-success" style="display:inline-block;">
                         <h7 id="depthSliderLabel" style="text-transform:none!important;">
-                            
+
                         </h7>
                     </div>
                 </div>

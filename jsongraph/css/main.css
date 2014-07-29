@@ -24,10 +24,47 @@
     display: block;
     margin-right: auto;
     margin-left: auto;
-    text-align:center
+    text-align: center;
 }
 
-.gvertical{
-    margin-top:5px;
-    margin-bottom:5px;
+.gvertical {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
+
+
+/*textarea {
+    width: 400px;
+    overflow: hidden;
+    line-height: 13px;
+    font-size: 13px;
+    border: 1px solid #999;
+    padding: 10px;
+    font-family: monospace;
+    margin: 0;
+    display: block;
+    outline: none;
+}
+
+    textarea:focus {
+        border-color: #333;
+    }
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.line-nums {
+    font-size: 13px;
+    line-height: 13px;
+    padding: 10px 4px;
+    font-family: monospace;
+    background: #EEE;
+    position: absolute;
+    width: 20px;
+    left: -28px;
+    bottom: 0;
+    top: 0;
+    text-align: right;
+}*/

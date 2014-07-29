@@ -1,6 +1,88 @@
-﻿function draw() {
+﻿var errorLabel = $('<div class="label label-danger" style="display:inline-block;position:absolute;max-width:230px"><h7 style="text-transform:none!important;text-align:left;white-space: pre-line;"></h7></div>');
+
+function format() {
+    var jsonStr = $("#jsonInput").val();
+    var res = formatter.formatJson(jsonStr);
+    $("#jsonInput").val(res);
+}
+
+function isValid() {
+    $('.lineno').each(function (item) { $(this).css('background-color', 'white') });
+    errorLabel.detach();
+
+    var jsonStr = $("#jsonInput").val();
+
+    try {
+        jsonlint.parse(jsonStr)
+    } catch (e) {
+        //extract error line no
+        var errorStr = ('error on line ');
+        var ind = e.message.indexOf('error on line ') + errorStr.length;
+        if (ind > errorStr.length) {
+            //string found
+            var trimmed = e.message.slice(ind);
+
+            var ind2 = trimmed.indexOf(':');
+            if (ind2 > 0) {
+                //form label msg
+                var msgLines = e.message.split('\n');
+                var charPos = msgLines[2].length - 1
+                //var char = msgLines[1][charPos];
+
+
+                var labelMsg = msgLines[1].slice(0, charPos) + '►' + msgLines[1].slice(charPos)
+                    + '\n'
+                    + '\n'
+                    + msgLines[3];
+
+                var lineNo = parseInt(trimmed.slice(0, ind2));
+
+                //$('.lineno').css('background-color', 'white');
+
+                var lineTag = $('.lineno').eq(lineNo - 1);
+                lineTag.css('background-color', '#FF3B30');
+
+
+                errorLabel.children('h7').eq(0).text(labelMsg);
+
+                lineTag.append(errorLabel);
+
+                var right = ($(window).width() - (lineTag.offset().left + lineTag.outerWidth()));
+                errorLabel.css({ right: right, top: lineTag.offset().top + lineTag.outerHeight() });
+
+                //console.log(msgLines[3]);
+                //console.log(e.message[3]);
+                //debugger
+                //show error label
+            }
+        }
+        //console.log(e)
+        //console.log(e.message)
+        return false;
+    }
+
+    //if (!jsonlint.parse(jsonStr)) {
+    ////    invalid json, print error msg
+    //    console.log("error parsing json");
+    //    console.log(JSLINT.errors);
+    //    return false;
+    //}
+
+
+    return true
+}
+
+function draw() {
     //console.log($("#jsonInput").val());
-    drawJson(JSON.parse($("#jsonInput").val()));
+    format();
+
+    if (!isValid()) {
+        return;
+    }
+
+    var jsonStr = $("#jsonInput").val();
+    drawJson(JSON.parse(jsonStr));
+
 
     $("#depthSlider").slider({
 
@@ -62,18 +144,24 @@ function copyValue() {
 }
 
 $(document).ready(function () {
-    $('#info').tooltip({ html: true, title: 'Version 1.0<br><br>Developed by Mostafa Gaafar<br><br>Graph by arbor.js' })
+    $('#info').tooltip({ html: true, title: 'Version 1.1<br><br>Created by Mostafa Gaafar' })
     $('#help').tooltip({ html: true, title: 'Paste JSON and press "Draw"<br><br>Click a node to see its path & value<br><br>Double click to expand/collapse' })
     $('.popover-dismiss').popover({
         trigger: 'focus'
     })
 
 
-    
+    $('#jsonInput').bind('input propertychange', isValid);
+
+
 
     $("#btnDraw").click(draw);
+    $("#btnFormat").click(format);
     //$("#copyPath").click(copyPath);
     //$("#copyValue").click(copyValue);
+
+
+    $(".linedtextarea").linedtextarea();
 
     var temp = '{"_id": "53d1cef83b04edda916d716f","index": 0,"guid": "fe1f0100-5689-4a22-9940-4bdbd5af55dc","isActive": false,"balance": "$1,095.73","picture": "http://placehold.it/32x32","age": 21,"eyeColor": "blue","name": "Concepcion Tyson","gender": "female","company": "QUARMONY","email": "concepciontyson@quarmony.com"}';
 
@@ -82,8 +170,8 @@ $(document).ready(function () {
     var instructions = {
         hi: "this is the coolest way to view a JSON!",
         start: { step1: "click on the JSON tab on top", step2: "Paste your JSON", step3: "Click Draw" },
-        view: { value: "click to see node path & value", collapse: "double click to expand/collapse nodes with a stroke" },
-        credits: { developer: "Mostafa Gaafar", graph: "arbor.js", ui: "Bootstrap + Get Shit Done" },
+        use: { value: "click to see node path & value", collapse: "double click to expand/collapse nodes with a stroke" },
+        credits: { developer: "Mostafa Gaafar", graph: "arbor.js", ui: "Bootstrap + Get Shit Done", textarea: "jquery-linedtextarea",lint:"jsonlint" },
         notes: ["works best for smaller JSON", "send feedback to @iga3far"]
     };
     var insJson = JSON.stringify(instructions);
