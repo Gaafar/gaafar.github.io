@@ -191,12 +191,20 @@ var renderer = function (canvas) {
 
                     return false
                 },
+                hoverEnter: function () {
+                 //TODO: display label on hover
+
+                },
+                hoverLeave: function () {
+
+                }
             }
 
             // start listening
             $(canvas).mousedown(handler.clicked);
             $(canvas).mousemove(handler.moved);
             $(canvas).dblclick(handler.dblclick)
+            $(canvas).hover(handler.hoverEnter, handler.hoverLeave)
 
         },
         unbind: function () {

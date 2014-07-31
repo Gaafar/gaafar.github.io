@@ -1,0 +1,33 @@
+
+.page {
+    width: 100%;
+}
+
+.socialIcon {
+    width: 80px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.constr {
+    font-size: 400%;
+    margin-top: 7%;
+    margin-bottom: 5%;
+}
+
+.gcenter {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.gvertical {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.gaafarPic {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
