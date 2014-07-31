@@ -11,8 +11,8 @@
 
 .constr {
     font-size: 400%;
-    margin-top: 7%;
-    margin-bottom: 5%;
+    margin-top: 5%;
+    /*margin-bottom: 5%;*/
 }
 
 .gcenter {
@@ -29,5 +29,15 @@
 
 .gaafarPic {
     margin-top: 5%;
-    margin-bottom: 5%;
+}
+
+.socialContainer{
+    margin-top:3%
+}
+
+.tagLine{
+    width:500px;
+}
+.gName{
+font-size:300%;
 }
