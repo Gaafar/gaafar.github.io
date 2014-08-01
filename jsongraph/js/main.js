@@ -9,6 +9,7 @@ var renderer = function (canvas) {
     var ctx = canvas.getContext("2d");
     var particleSystem;
     var swatch = ['snow', 'orange', 'yellow', 'lightgreen', 'coral', 'lightblue'];
+    var hovering = [];
 
     function getNodeColor(i, swatch) {
         if (i < 0) {
@@ -96,6 +97,12 @@ var renderer = function (canvas) {
                 ctx.font = "14px Arial";
                 //console.log((ctx.measureText(node.name)));
                 ctx.fillText(node.data['@meta@'].displayName, (pt.x - (ctx.measureText(node.data['@meta@'].displayName).width / 2)), (pt.y));
+
+                //draw hovering label
+                if (node==hovering[0])
+                {
+                    //console.log(node);
+                }
             })
         },
 
@@ -167,12 +174,23 @@ var renderer = function (canvas) {
                     _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top)
                     nearest = particleSystem.nearest(_mouseP);
                     //if (!nearest) return false
-                    if (!nearest.node) return false
+                    if (!nearest||!nearest.node) return false
 
                     if (nearest.node.data.shape != 'dot') {
-                        selected = (nearest.distance < 30) ? nearest : null
+                        selected = (nearest.distance < nearest.node.data['@meta@'].radius) ? nearest : null
                         if (selected) {
-                            //console.log(selected.node.data);
+
+                            //clear selection and remove displayed values
+
+
+                            //console.log("hovering...");
+                            for (var node in hovering) {
+
+                            }
+
+                            hovering = [nearest.node];
+                            //must draw someting to force redraw
+
                             //dom.addClass('linkable')
                             //window.status = selected.node.data.link.replace(/^\//, "http://" + window.location.host + "/").replace(/^#/, '')
                         }
@@ -192,7 +210,7 @@ var renderer = function (canvas) {
                     return false
                 },
                 hoverEnter: function () {
-                 //TODO: display label on hover
+                    //TODO: display label on hover
 
                 },
                 hoverLeave: function () {
@@ -257,7 +275,8 @@ function createNode(name, obj, parent, level, maxLevel) {
 
     obj['@meta@'].level = level;
     obj['@meta@'].type = typeof (obj.original);
-    obj['@meta@'].radius = 30 - (level * 4)
+    obj['@meta@'].radius = 40 - (level * 4)
+    obj['@meta@'].radius = obj['@meta@'].radius > 5 ? obj['@meta@'].radius : 5;
 
     //add current node with its data
     sys.addNode(obj['@meta@'].path, obj);
@@ -283,9 +302,9 @@ function createNode(name, obj, parent, level, maxLevel) {
     }
 
     //to set max json depth
-    if(maxLevel==Number.POSITIVE_INFINITY)//when drawing entire json only
+    if (maxLevel == Number.POSITIVE_INFINITY)//when drawing entire json only
     {
-        jsonDepth = level > jsonDepth?level:jsonDepth;
+        jsonDepth = level > jsonDepth ? level : jsonDepth;
     }
 }
 
