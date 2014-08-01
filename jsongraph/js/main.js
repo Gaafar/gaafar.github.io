@@ -212,7 +212,7 @@ var renderer = function (canvas) {
                                     destroyLabel(hovering[i]);
                             }
 
-                            if (hovering.indexOf(node) > -1) {
+                            if (hovering.indexOf(selected.node) > -1) {
                                 //same node hovered
                             } else {
                                 createLabel(selected.node)
