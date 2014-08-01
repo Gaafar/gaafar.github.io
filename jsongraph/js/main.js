@@ -77,32 +77,44 @@ var renderer = function (canvas) {
                 // node: {mass:#, p:{x,y}, name:"", data:{}}
                 // pt:   {x:#, y:#}  node position in screen coords
 
-                // draw a rectangle centered at pt
-                var w = node.data['@meta@'].radius;
-                ctx.fillStyle = (node.data.alone) ? "orange" : "black"
-                //ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w)
-                ctx.beginPath();
-                ctx.arc(pt.x, pt.y, w, 0, 2 * Math.PI, false);
-                ctx.fillStyle = getNodeColor(node.data['@meta@'].level, swatch);
-                ctx.fill();
 
-                if (node.data['@meta@'].type == 'object') {
-                    ctx.lineWidth = 4
-                    ctx.strokeStyle = getNodeColor(node.data['@meta@'].level + 1, swatch);
-                    ctx.stroke();
-                    ctx.lineWidth = 1
+                //draw labels
+                if (node.data['@meta@'].hasOwnProperty('isLabel') && node.data['@meta@'].isLabel) {
+                    var w = node.data['@meta@'].radius;
+                    ctx.beginPath();
+                    ctx.fillStyle = 'pink';//getNodeColor(node.data['@meta@'].level, swatch);
+                    ctx.strokeStyle = 'pink';
+                    //ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w);
+                    var width = ctx.measureText(node.data['@meta@'].displayName).width + 8;
+                    var x = pt.x - width / 2;
+                    var h = 20;
+                    var y = pt.y - h * 0.7;
+                    drawRoundedRectangle(ctx, x, y, width, h, 8);
+                    ctx.fill();
+
+                } else {
+
+                    // draw a circle centered at pt
+                    var w = node.data['@meta@'].radius;
+                    //ctx.fillStyle = (node.data.alone) ? "orange" : "black"
+                    //ctx.fillRect(pt.x - w / 2, pt.y - w / 2, w, w)
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, w, 0, 2 * Math.PI, false);
+                    ctx.fillStyle = getNodeColor(node.data['@meta@'].level, swatch);
+                    ctx.fill();
+
+                    if (node.data['@meta@'].type == 'object') {
+                        ctx.lineWidth = 4
+                        ctx.strokeStyle = getNodeColor(node.data['@meta@'].level + 1, swatch);
+                        ctx.stroke();
+                        ctx.lineWidth = 1
+                    }
                 }
-
                 ctx.fillStyle = "gray";
                 ctx.font = "14px Arial";
                 //console.log((ctx.measureText(node.name)));
                 ctx.fillText(node.data['@meta@'].displayName, (pt.x - (ctx.measureText(node.data['@meta@'].displayName).width / 2)), (pt.y));
 
-                //draw hovering label
-                if (node==hovering[0])
-                {
-                    //console.log(node);
-                }
             })
         },
 
@@ -121,14 +133,18 @@ var renderer = function (canvas) {
                     dragged = particleSystem.nearest(_mouseP);
 
                     if (dragged && dragged.node !== null) {
-                        // while we're dragging, don't let physics move the node
-                        dragged.node.fixed = true
+                        if (dragged.distance < dragged.node.data['@meta@'].radius) {
+                            if (!dragged.node.data['@meta@'].isLabel) {
+                                // while we're dragging, don't let physics move the node
+                                dragged.node.fixed = true
+                                displayInfo(dragged.node);
+                            }
+                        }
                     }
 
                     $(canvas).unbind('mousemove', handler.moved);
                     $(canvas).bind('mousemove', handler.dragged)
                     $(window).bind('mouseup', handler.dropped)
-                    displayInfo(dragged.node);
                     //console.log(dragged.node);
 
                     return false
@@ -140,9 +156,13 @@ var renderer = function (canvas) {
 
                     //temp fix for root collapse then expand bug
                     //if (dblclicked.node.data['@meta@'].path != 'root') {
-
-                    toggleExpand(dblclicked.node);
-                    //}
+                    if (dblclicked && dblclicked.node !== null) {
+                        if (dblclicked.distance < dblclicked.node.data['@meta@'].radius) {
+                            if (!dblclicked.node.data['@meta@'].isLabel) {
+                                toggleExpand(dblclicked.node);
+                            }
+                        }
+                    }                //}
                 }
                 ,
                 dragged: function (e) {
@@ -150,8 +170,11 @@ var renderer = function (canvas) {
                     var s = arbor.Point(e.pageX - pos.left, e.pageY - pos.top)
 
                     if (dragged && dragged.node !== null) {
-                        var p = particleSystem.fromScreen(s)
-                        dragged.node.p = p
+                        if (dragged.distance < dragged.node.data['@meta@'].radius) {
+
+                            var p = particleSystem.fromScreen(s)
+                            dragged.node.p = p
+                        }
                     }
 
                     return false
@@ -174,22 +197,29 @@ var renderer = function (canvas) {
                     _mouseP = arbor.Point(e.pageX - pos.left, e.pageY - pos.top)
                     nearest = particleSystem.nearest(_mouseP);
                     //if (!nearest) return false
-                    if (!nearest||!nearest.node) return false
+                    if (!nearest || !nearest.node) return false
 
                     if (nearest.node.data.shape != 'dot') {
                         selected = (nearest.distance < nearest.node.data['@meta@'].radius) ? nearest : null
-                        if (selected) {
+                        if (selected && !selected.node.data['@meta@'].isLabel) {
 
                             //clear selection and remove displayed values
 
 
                             //console.log("hovering...");
-                            for (var node in hovering) {
-
+                            for (var i in hovering) {
+                                if (hovering[i] != selected.node)
+                                    destroyLabel(hovering[i]);
                             }
 
-                            hovering = [nearest.node];
-                            //must draw someting to force redraw
+                            if (hovering.indexOf(node) > -1) {
+                                //same node hovered
+                            } else {
+                                createLabel(selected.node)
+                                hovering = [selected.node];
+                            }
+
+                            //must add nodes to force redraw
 
                             //dom.addClass('linkable')
                             //window.status = selected.node.data.link.replace(/^\//, "http://" + window.location.host + "/").replace(/^#/, '')
@@ -307,6 +337,48 @@ function createNode(name, obj, parent, level, maxLevel) {
         jsonDepth = level > jsonDepth ? level : jsonDepth;
     }
 }
+
+function createLabel(parentNode) {
+
+    if (parentNode.data['@meta@'].hasLabel) return;
+
+    //if (typeof (parentNode.data.original) == "object") {
+
+    //    var name = parentNode.data['@meta@'].type;
+    //} else {
+    //    var name = parentNode.data.original;
+
+    //}
+    var name = getDisplayType(parentNode);
+
+    var obj = {
+    }
+    obj['@meta@'] = {
+        path: parentNode.data['@meta@'].path + "#label",
+        displayName: name,
+        isLabel: true,
+    }
+    obj['@meta@'].radius = parentNode.data['@meta@'].radius;
+
+    //add current node with its data
+    sys.addNode(obj['@meta@'].path, obj);
+    //add edge to parentNode node
+    var edgeParams = {
+        length: 0.05
+    }
+
+    sys.addEdge(obj['@meta@'].path, parentNode.data['@meta@'].path, edgeParams)
+
+    parentNode.data['@meta@'].hasLabel = true;
+}
+
+function destroyLabel(parentNode) {
+    if (parentNode.data['@meta@'].hasLabel) {
+        sys.pruneNode(parentNode.data['@meta@'].path + "#label")
+    }
+    parentNode.data['@meta@'].hasLabel = false;
+}
+
 
 function toggleExpand(node) {
     if (node.data['@meta@'].isExpanded == true) {
@@ -427,4 +499,43 @@ function drawTillDepth(node, depth) {
         }
     }
 
+}
+
+function drawRoundedRectangle(ctx, x, y, w, h, r) {
+
+
+    //// Set rectangle and corner values
+    //var x = 50;
+    //var y = 50;
+    //var w = 100;
+    //var h = 100;
+    //var r = 20;
+
+    // Set faux rounded corners
+    ctx.lineJoin = "round";
+    ctx.lineWidth = r;
+
+    // Change origin and dimensions to match true size (a stroke makes the shape a bit larger)
+    ctx.strokeRect(x + (r / 2), y + (r / 2), w - r, h - r);
+    ctx.fillRect(x + (r / 2), y + (r / 2), w - r, h - r);
+
+}
+
+function getDisplayType(node) {
+
+    //to print array and object nicely
+    if (typeof (node.data.original) == 'object') {
+        if (node.data.original[0] && node.data.original.length)//array
+        {
+            value = 'Array[' + node.data.original.length + ']';
+        }
+        else {
+            //just object
+            value = '{Object}';
+        }
+
+    } else {
+        value = node.data.original;
+    }
+    return value;
 }

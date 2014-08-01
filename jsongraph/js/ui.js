@@ -111,21 +111,8 @@ function displayInfo(node) {
 
     $('#nodePath').text(node.data['@meta@'].path.toString());
 
-    var value;
-    //to print array and object nicely
-    if (typeof (node.data.original) == 'object') {
-        if (node.data.original[0] && node.data.original.length)//array
-        {
-            value = 'Array[' + node.data.original.length + ']';
-        }
-        else {
-            //just object
-            value = '{Object}';
-        }
-
-    } else {
-        value = node.data.original.toString();
-    }
+    var value = getDisplayType(node);
+    
 
     $('#nodeValue').text(value);
 
