@@ -16,8 +16,8 @@ var renderer = function (canvas) {
             return swatch[0]
         }
         if (i > swatch.length - 1) {
-            //return getNodeColor(i - swatch.length, swatch);
-            return swatch[swatch.length - 1]
+            return getNodeColor(i - swatch.length, swatch);
+            //return swatch[swatch.length - 1]
         } else {
             return swatch[i]
         }
@@ -77,7 +77,9 @@ var renderer = function (canvas) {
                 // node: {mass:#, p:{x,y}, name:"", data:{}}
                 // pt:   {x:#, y:#}  node position in screen coords
 
-
+                if (hovering[0] && node == hovering[0].node) {
+                    //console.log(hovering[0])
+                }
                 //draw labels
                 if (node.data['@meta@'].hasOwnProperty('isLabel') && node.data['@meta@'].isLabel) {
                     var w = node.data['@meta@'].radius;
@@ -92,7 +94,9 @@ var renderer = function (canvas) {
                     drawRoundedRectangle(ctx, x, y, width, h, 8);
                     ctx.fill();
 
-                } else {
+                }
+
+                else {
 
                     // draw a circle centered at pt
                     var w = node.data['@meta@'].radius;
@@ -202,22 +206,27 @@ var renderer = function (canvas) {
                     if (nearest.node.data.shape != 'dot') {
                         selected = (nearest.distance < nearest.node.data['@meta@'].radius) ? nearest : null
                         if (selected && !selected.node.data['@meta@'].isLabel) {
+                            hovering = [{ node: selected.node, mousePos: _mouseP }];
+
+                            //TODO: add tooltip here
+
 
                             //clear selection and remove displayed values
 
 
                             //console.log("hovering...");
-                            for (var i in hovering) {
-                                if (hovering[i] != selected.node)
-                                    destroyLabel(hovering[i]);
-                            }
+                            //for (var i in hovering) {
+                            //    //if (hovering[i] != selected.node)
+                            //    //destroyLabel(hovering[i]);
+                            //}
+                            //hovering = [];
 
-                            if (hovering.indexOf(selected.node) > -1) {
-                                //same node hovered
-                            } else {
-                                createLabel(selected.node)
-                                hovering = [selected.node];
-                            }
+                            //if (hovering.indexOf(selected.node) > -1) {
+                            //    //same node hovered
+                            //} else {
+                            //    //createLabel(selected.node)
+                            //    hovering = [{ node: selected.node, mousePos: _mouseP }];
+                            //}
 
                             //must add nodes to force redraw
 

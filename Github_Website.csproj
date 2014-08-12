@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A23D725A-38F5-4368-A53F-83427CA2C464}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Github_Website</RootNamespace>
+    <AssemblyName>Github_Website</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icons\facebook.psd" />
+    <Content Include="images\1459675_570553943021015_195973270_n.psd" />
+    <Content Include="jsongraph\js\.jshintrc" />
+    <Content Include="jsongraph\js\ZeroClipboard.Core.min.map" />
+    <Content Include="jsongraph\js\ZeroClipboard.min.map" />
+    <Content Include="jsongraph\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="jsongraph\obj\Debug\jsonGraph.csprojResolveAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\flatly-bootstrap.min.css" />
+    <Content Include="css\home.css" />
+    <Content Include="google8bd3b104e3c3ba0c.html" />
+    <Content Include="icons\facebook.png" />
+    <Content Include="icons\linkedin.png" />
+    <Content Include="icons\twitter.png" />
+    <Content Include="images\1459675_570553943021015_195973270_n.jpg" />
+    <Content Include="index.html" />
+    <Content Include="jsongraph\css\get-shit-done.css" />
+    <Content Include="jsongraph\css\gsdk-base.css" />
+    <Content Include="jsongraph\css\gsdk-checkbox-radio-switch.css" />
+    <Content Include="jsongraph\css\gsdk-sliders.css" />
+    <Content Include="jsongraph\css\jquery-linedtextarea.css" />
+    <Content Include="jsongraph\css\main.css" />
+    <Content Include="jsongraph\index.html" />
+    <Content Include="jsongraph\jsonGraph.csproj" />
+    <Content Include="jsongraph\jsonGraph.csproj.user" />
+    <Content Include="jsongraph\jsonGraph.sln" />
+    <Content Include="jsongraph\js\arbor-graphics.js" />
+    <Content Include="jsongraph\js\arbor-tween.js" />
+    <Content Include="jsongraph\js\arbor.js" />
+    <Content Include="jsongraph\js\clipboard.js" />
+    <Content Include="jsongraph\js\formatter.js" />
+    <Content Include="jsongraph\js\jquery-linedtextarea.js" />
+    <Content Include="jsongraph\js\jquery-ui.min.js" />
+    <Content Include="jsongraph\js\jsonlint.js" />
+    <Content Include="jsongraph\js\main.js" />
+    <Content Include="jsongraph\js\ui.js" />
+    <Content Include="jsongraph\js\ZeroClipboard.Core.js" />
+    <Content Include="jsongraph\js\ZeroClipboard.Core.min.js" />
+    <Content Include="jsongraph\js\ZeroClipboard.js" />
+    <Content Include="jsongraph\js\ZeroClipboard.min.js" />
+    <Content Include="jsongraph\js\ZeroClipboard.swf" />
+    <Content Include="jsongraph\obj\Debug\jsonGraph.csproj.FileListAbsolute.txt" />
+    <Content Include="jsongraph\sample-project\index.html" />
+    <Content Include="jsongraph\sample-project\main.js" />
+    <Content Include="jsongraph\sample-project\style.css" />
+    <Content Include="jsongraph\test.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="jsongraph\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="jsongraph\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="jsongraph\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="jsongraph\bin\" />
+    <Folder Include="jsongraph\obj\Debug\TempPE\" />
+    <Folder Include="jsongraph\Properties\" />
+    <Folder Include="js\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1828</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1828/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
