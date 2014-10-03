@@ -60,10 +60,6 @@
     <Content Include="icons\facebook.psd" />
     <Content Include="images\1459675_570553943021015_195973270_n.psd" />
     <Content Include="jsongraph\js\.jshintrc" />
-    <Content Include="jsongraph\js\ZeroClipboard.Core.min.map" />
-    <Content Include="jsongraph\js\ZeroClipboard.min.map" />
-    <Content Include="jsongraph\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="jsongraph\obj\Debug\jsonGraph.csprojResolveAssemblyReference.cache" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\flatly-bootstrap.min.css" />
@@ -81,40 +77,23 @@
     <Content Include="jsongraph\css\jquery-linedtextarea.css" />
     <Content Include="jsongraph\css\main.css" />
     <Content Include="jsongraph\index.html" />
-    <Content Include="jsongraph\jsonGraph.csproj" />
-    <Content Include="jsongraph\jsonGraph.csproj.user" />
-    <Content Include="jsongraph\jsonGraph.sln" />
     <Content Include="jsongraph\js\arbor-graphics.js" />
     <Content Include="jsongraph\js\arbor-tween.js" />
     <Content Include="jsongraph\js\arbor.js" />
-    <Content Include="jsongraph\js\clipboard.js" />
     <Content Include="jsongraph\js\formatter.js" />
     <Content Include="jsongraph\js\jquery-linedtextarea.js" />
     <Content Include="jsongraph\js\jquery-ui.min.js" />
     <Content Include="jsongraph\js\jsonlint.js" />
     <Content Include="jsongraph\js\main.js" />
     <Content Include="jsongraph\js\ui.js" />
-    <Content Include="jsongraph\js\ZeroClipboard.Core.js" />
-    <Content Include="jsongraph\js\ZeroClipboard.Core.min.js" />
-    <Content Include="jsongraph\js\ZeroClipboard.js" />
-    <Content Include="jsongraph\js\ZeroClipboard.min.js" />
-    <Content Include="jsongraph\js\ZeroClipboard.swf" />
-    <Content Include="jsongraph\obj\Debug\jsonGraph.csproj.FileListAbsolute.txt" />
     <Content Include="jsongraph\sample-project\index.html" />
     <Content Include="jsongraph\sample-project\main.js" />
     <Content Include="jsongraph\sample-project\style.css" />
-    <Content Include="jsongraph\test.html" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="jsongraph\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="jsongraph\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="jsongraph\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="jsongraph\bin\" />
-    <Folder Include="jsongraph\obj\Debug\TempPE\" />
-    <Folder Include="jsongraph\Properties\" />
     <Folder Include="js\" />
   </ItemGroup>
   <PropertyGroup>
