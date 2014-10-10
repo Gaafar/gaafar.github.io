@@ -1,0 +1,100 @@
+﻿body {
+}
+
+.gpage {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    display: block;
+}
+
+.gnav {
+    margin-left: 25% !important;
+    margin-right: auto !important;
+    margin-bottom: 10px;
+    display: block !important;
+}
+
+.gborder {
+    border: 1px solid #05AE0E;
+    border-radius: 6px;
+}
+
+.gcenter {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.gvertical {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+.small-button-background {
+    width: 86px;
+    height: 84px;
+    margin-top: 3px;
+    margin-left: 3px;
+    position: absolute;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.small-button:active {
+    background: url('../images/transparent_button_pressed.png') no-repeat;
+}
+
+.small-button {
+    width: 94px;
+    height: 89px;
+    position: absolute;
+    content: url('../images/transparent_button_pressed.png') url('../images/transparent_button_normal.png');
+    background: url('../images/transparent_button_normal.png') no-repeat;
+}
+
+.small-button-shadow {
+    width: 94px;
+    height: 89px;
+    background: url('../images/transparent_button_small_shadow.png') no-repeat;
+}
+
+/*textarea {
+    width: 400px;
+    overflow: hidden;
+    line-height: 13px;
+    font-size: 13px;
+    border: 1px solid #999;
+    padding: 10px;
+    font-family: monospace;
+    margin: 0;
+    display: block;
+    outline: none;
+}
+
+    textarea:focus {
+        border-color: #333;
+    }
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+.line-nums {
+    font-size: 13px;
+    line-height: 13px;
+    padding: 10px 4px;
+    font-family: monospace;
+    background: #EEE;
+    position: absolute;
+    width: 20px;
+    left: -28px;
+    bottom: 0;
+    top: 0;
+    text-align: right;
+}*/

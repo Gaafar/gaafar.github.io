@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <link href="css/main.css" rel="stylesheet" />
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'http://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-53314840-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+    <meta name="description" content="Instant 7ambolla">
+
+    <title>Instant 7ambolla</title>
+</head>
+<body>
+    <audio controls id="instaAudio" style="display:none;">
+        <source src="3aaa.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <h1 class="page-header gcenter" style="color:#0099ff">
+        Instant 3aaa
+    </h1>
+
+    <div class="gcenter">
+        <img class="gcenter" src="images/7ambolla.jpg" />
+        <div class="gcenter" style="display:inline-block; margin-top:20px;">
+            <div class="circle small-button-background" style="background-color:#FF0000;"></div>
+            <div class="small-button" onclick="play()"></div>
+            <div class="small-button-shadow" style="margin-bottom:5px;"></div>
+        </div>
+    </div>
+    <a href="https://www.youtube.com/watch?v=5EJIkhgp_3Q" target="_blank">
+        <h6 class="gcenter">
+
+            Full video
+        </h6>
+    </a>
+
+    <script>
+        function play() {
+            var vid = document.getElementById("instaAudio");
+            vid.currentTime = 0;
+            vid.play();
+        }
+
+    </script>
+</body>
+</html>
