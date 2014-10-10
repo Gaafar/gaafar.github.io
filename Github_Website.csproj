@@ -59,6 +59,13 @@
   <ItemGroup>
     <Content Include="icons\facebook.psd" />
     <Content Include="images\1459675_570553943021015_195973270_n.psd" />
+    <Content Include="instant3aaa\3aaa.mp3" />
+    <Content Include="instant3aaa\images\7ambolla.jpg" />
+    <Content Include="instant3aaa\css\main.css" />
+    <Content Include="instant3aaa\images\transparent_button_normal.png" />
+    <Content Include="instant3aaa\images\transparent_button_pressed.png" />
+    <Content Include="instant3aaa\images\transparent_button_shadow.png" />
+    <Content Include="instant3aaa\index.html" />
     <Content Include="jsongraph\js\.jshintrc" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +101,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="instant3aaa\js\" />
     <Folder Include="js\" />
   </ItemGroup>
   <PropertyGroup>
