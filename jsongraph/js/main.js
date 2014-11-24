@@ -5,10 +5,10 @@
 //Then the .redraw method will be called each time the screen needs to be re-plotted. 
 
 var renderer = function (canvas) {
-    var canvas = $(canvas).get(0)
+    var canvas = $(canvas).get(0);
     var ctx = canvas.getContext("2d");
     var particleSystem;
-    var swatch = ['snow', 'orange', 'yellow', 'lightgreen', 'coral', 'lightblue'];
+    var swatch = ['snow', '#ffd147','#55ed5a', 'yellow', 'coral', 'lightblue'];
     var hovering = [];
 
     function getNodeColor(i, swatch) {
