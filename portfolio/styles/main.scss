@@ -1,0 +1,84 @@
+$headshotSize: 150px;
+
+body {
+  font-family: 'Open Sans', sans-serif
+}
+
+.p-headshot {
+  //  height: $headshotSize;
+  //  width: $headshotSize;
+  border: solid 6px white;
+}
+
+.p-header {
+  padding: 10px 48px;
+  border-radius: 0px;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+}
+
+.p-name {
+  font-family: 'Slabo 27px', serif;
+  text-align: left;
+}
+
+.p-link, .p-link:hover {
+  font-size: 3em;
+  text-decoration: none;
+  margin: 0 4px;
+}
+
+.p-link {
+  color: white;
+}
+
+.p-link:hover {
+  color: #7CDEFF;
+}
+
+.cd-timeline-img.cd-picture {
+  display: flex;
+}
+
+.p-timeline-icon {
+  font-size: 2.5em;
+  position: relative;
+  text-align: center;
+  color: white;
+  margin: auto;
+/*  left: 1px;
+  top: 1px;*/
+}
+
+.p-timeline {
+  background-color: #7CDEFF;
+}
+
+/*override timeline styles*/
+.cd-timeline-content h2 {
+  font-size: 2.5rem;
+}
+
+.cd-timeline-content p {
+  font-size: 1.5rem;
+}
+
+.cd-timeline-content .cd-date {
+  font-size: 2rem;
+}
+
+#cd-timeline {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 7rem 0;
+}
+
+.cd-timeline-content .cd-read-more {
+  font-size: 1.3rem;
+}
+
+/*override animated headline*/
+.cd-headline {
+  font-size: 4rem;
+}

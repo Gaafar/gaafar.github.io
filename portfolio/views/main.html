@@ -1,0 +1,60 @@
+<div ng-controller="MainCtrl">
+
+    <div class="p-header bg-primary">
+        <div class="col-lg-2">
+            <img ng-src="{{p.headshot}}" class="img-circle p-headshot img-responsive">
+        </div>
+        <div class="col-lg-4">
+            <h1 class=" p-name">{{p.name}}</h1>
+            <h4> {{p.summary}}</h4>
+
+            <div>
+
+                <a class="p-link" ng-href="{{link.url}}" ng-repeat="link in p.links">
+                    <i class="fa fa-{{link.fa_icon}}"></i>
+                </a>
+
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <section class="cd-intro">
+                <h1 class="cd-headline rotate-1">
+                    <span ng-bind-html="p.headline.sentence"></span>
+			<span class="cd-words-wrapper">
+				<b class="is-visible">{{p.headline.firstWord}}</b>
+				<b ng-repeat="word in p.headline.words">{{word}}</b>
+			</span>
+                </h1>
+            </section>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div ng-controller="TimelineCtrl" class="p-timeline">
+    <section id="cd-timeline" class="cd-container">
+
+        <div class="cd-timeline-block" ng-repeat="event in p.timeline track by $index" after-repeat>
+            <div class="cd-timeline-img cd-picture">
+                <!--<img src="img/cd-icon-picture.svg" alt="Picture">-->
+                <i class="fa fa-{{event.fa_icon}} p-timeline-icon"></i>
+            </div>
+
+
+            <div class="cd-timeline-content">
+                <h2>{{event.title}}</h2>
+
+                <p ng-bind-html="event.content"></p>
+                <a ng-href={{event.href}} class="cd-read-more">Read more</a>
+                <span class="cd-date">{{event.date}}</span>
+            </div>
+            <!-- cd-timeline-content -->
+        </div>
+        <!-- cd-timeline-block -->
+
+    </section>
+    <!-- cd-timeline -->
+</div>
