@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <link href="ngCubeSpinner/css/ngCubeSpinner.min.css" rel="stylesheet">
+</head>
+<body ng-app="app">
+
+<div ng-controller="testController">
+    <h2>
+        showSpinner: {{showSpinner}}
+    </h2>
+    <button ng-click="toggleSpinner()">Toggle</button>
+    <cube-spinner show="showSpinner"></cube-spinner>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+<script src="ngCubeSpinner/ngCubeSpinner.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
